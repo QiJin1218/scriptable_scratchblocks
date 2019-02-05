@@ -1,4 +1,7 @@
 const puppeteer = require('puppeteer');
+const block_code = 'test';
+const base = 'http://scratchblocks.github.io/#?style=scratch3&script=';
+const link = base + block_code;
 
 (async () => {
   const browser = await puppeteer.launch({
@@ -6,9 +9,10 @@ const puppeteer = require('puppeteer');
   });
   const page = await browser.newPage();
   const PNG_SELECTOR = '#export-png';
-  await page.goto('http://scratchblocks.github.io/#?style=scratch3&script=test');
-  await page._client.send('Page.setDownloadBehavior', { behavior: 'allow', downloadPath: './scratchblocks_png/' });
+  console.log(link);
+  await page.goto(link);
+  // Redirect Download
+  // await page._client.send('Page.setDownloadBehavior', { behavior: 'allow', downloadPath: './scratchblocks_png/' });
   await page.click(PNG_SELECTOR);
   setTimeout(() => { browser.close(); }, 50);
-  // await browser.close();
 })();
