@@ -16,22 +16,16 @@ node script.js
 
 3. Scratchblocks output will be saved in the Downloads folder.
 
---
-
 ## Changing Download Directory
 
-Change the download directory by un-commenting line 15
+Change the download directory by un-commenting line 15 and changing the downloadPath
 ```javascript
 await page._client.send('Page.setDownloadBehavior', 
 { behavior: 'allow', downloadPath: './scratchblocks_png/' });
 ```
 Currently, changing the download directory sometimes causes the pictures to not save correctly.
 
---
-
 ## Dependencies
 
 [Puppeteer](https://github.com/GoogleChrome/puppeteer)
 [npm](https://github.com/npm/cli)
-
---
