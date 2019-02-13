@@ -9,7 +9,8 @@ def txt_to_json(directory, filename):
 	c = 0
 	for l in txtfile:
 		if(len(l) > 1):
-			jsonfile = open(fn + '_' + str(c) + '.json', 'w')
+			print(fn)
+			jsonfile = open(fn + '.json', 'w')
 			l2 = l.replace("u\'","\"")
 			line = l2.replace("\'","\"")
 			line = line.replace("None","null")
@@ -25,14 +26,6 @@ def txt_to_json(directory, filename):
 			json.dump(result, jsonfile)
 			jsonfile.close()
 
-def parse_json(jsonfile):
-	# parsed = json.load(jsonfile)
-	import ipdb
-	ipdb.set_trace()
-	print(json)
+	jsonfilename = fn + '.json'
 
-directory = '../sample_scratchcode/'
-filename = "test.json"
-txt_to_json(directory, filename)
-jsonfile = 'test0.txt'
-# parse_json(jsonfile)
+	return jsonfilename

@@ -5,6 +5,7 @@ const link = base + block_code;
 
 (async () => {
   const browser = await puppeteer.launch({
+  	headless : false
   });
   const page = await browser.newPage();
   const PNG_SELECTOR = '#export-png';
