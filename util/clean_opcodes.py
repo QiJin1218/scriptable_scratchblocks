@@ -1,4 +1,6 @@
 import pandas as pd
+import warnings
+warnings.simplefilter(action='ignore', category=FutureWarning)
 
 def clean_opcodes(filename):
 
@@ -10,6 +12,3 @@ def clean_opcodes(filename):
 	# ipdb.set_trace()
 
 	return opcodes
-
-filename = "opcodes.csv"
-clean_opcodes(filename)

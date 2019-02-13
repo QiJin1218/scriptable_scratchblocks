@@ -1,5 +1,5 @@
 const puppeteer = require('puppeteer');
-const block_code = 'test';
+const block_code = '';
 const base = 'http://scratchblocks.github.io/#?style=scratch3&script=';
 const link = base + block_code;
 
@@ -8,7 +8,6 @@ const link = base + block_code;
   });
   const page = await browser.newPage();
   const PNG_SELECTOR = '#export-png';
-  console.log(link);
   await page.goto(link);
   // Redirect Download
   // await page._client.send('Page.setDownloadBehavior', { behavior: 'allow', downloadPath: './scratchblocks_png/' });
