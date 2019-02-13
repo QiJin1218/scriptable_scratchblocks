@@ -9,7 +9,6 @@ def txt_to_json(directory, filename):
 	c = 0
 	for l in txtfile:
 		if(len(l) > 1):
-			print(fn)
 			jsonfile = open(fn + '.json', 'w')
 			l2 = l.replace("u\'","\"")
 			line = l2.replace("\'","\"")
