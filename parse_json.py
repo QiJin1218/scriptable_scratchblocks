@@ -59,9 +59,11 @@ def parse_commands(commands):
 		result += "%0A"
 
 	result = result.replace(" ", "%20")
+	result = result.replace("(", "[")
+	result = result.replace(")", "]")
 
-	with open('scratch_code.txt', 'w') as f:
-		f.write(result)
+	# with open('scratch_code.txt', 'w') as f:
+	# 	f.write(result)
 	return result
 
 def cm_input(val, inputs, delimiter):
@@ -110,6 +112,8 @@ def findinputval(inputs, counter):
 			return inputs['SECS'][1][1]
 	if 'STEPS' in inputs:
 		return inputs['STEPS'][1][1]
+	if 'DURATION' in inputs:
+		return inputs['DURATION'][1][1]
 	return None
 
 def findfieldval(fields):
@@ -117,22 +121,34 @@ def findfieldval(fields):
 	if 'KEY_OPTION' in fields:
 		return fields['KEY_OPTION'][0]
 
-def create_script(default_script, data):
+def create_script(directory, default_script, data, filename):
 
 	f = open(default_script, "r")
 	script = f.readlines()
+	fn = filename.split(".")
+	script_name = directory + fn[0] + ".js"
 
-	custom_script = open("custom_script.js", "w")
+	custom_script = open(script_name, "w")
 	for line in script:
 		code = "const block_code = \'" + data + "\';"
 		line = line.replace("const block_code = \'\';", code)
 		custom_script.write(line)
 
+def find_files(directory):
+
+	files = os.listdir(directory)
+	return files
+
 directory = "sample_scratchcode/"
-filename = "test_0.json"
-jsonfile = txtjson.txt_to_json(directory, filename)
-default_script = "script.js"
+files = find_files(directory)
+files.remove('.DS_Store')
 op_codes = co.clean_opcodes("opcodes.csv")
-commands = parse_json(jsonfile)
-scratchblocks_commands = parse_commands(commands)
-create_script(default_script, scratchblocks_commands)
+script_directory = "scripts/"
+output_directory = "cleaned_json/"
+for filename in files:
+	if filename == "rm417703_q3_script0.json":
+		jsonfile = txtjson.txt_to_json(directory, output_directory, filename)
+		default_script = "script.js"
+		commands = parse_json(jsonfile)
+		scratchblocks_commands = parse_commands(commands)
+		create_script(script_directory, default_script, scratchblocks_commands, filename)

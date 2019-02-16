@@ -1,5 +1,5 @@
 const puppeteer = require('puppeteer');
-const block_code = '';
+const block_code = 'When%20This%20Sprite%20Clicked%0AWait%20[9]%20Secs%0APlay%20Sound%20[]%20Until%20Done%0A';
 const base = 'http://scratchblocks.github.io/#?style=scratch3&script=';
 const link = base + block_code;
 
