@@ -27,5 +27,5 @@ Currently, changing the download directory sometimes causes the pictures to not 
 
 ## Dependencies
 
-[Puppeteer](https://github.com/GoogleChrome/puppeteer)
+[Puppeteer](https://github.com/GoogleChrome/puppeteer) \n
 [npm](https://github.com/npm/cli)
