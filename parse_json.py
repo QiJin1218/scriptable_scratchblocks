@@ -78,7 +78,11 @@ def cm_input(val, inputs, delimiter):
 	for v in vallist:
 		if(i < lenval-1):
 			inputval = findinputval(inputs, c)
-			if inputval is not None:
+			if inputval == "sound":
+				inputval = "sound v"
+			elif inputval == "costume":
+				inputval = "costume v"
+			elif inputval is not None:
 				inputval = inputval.replace("(", " ")
 				inputval = inputval.replace(")", " ")
 			else:
@@ -114,12 +118,16 @@ def findinputval(inputs, counter):
 		return inputs['STEPS'][1][1]
 	if 'DURATION' in inputs:
 		return inputs['DURATION'][1][1]
+	if 'SOUND_MENU' in inputs:
+		return "sound"
+	if 'COSTUME' in inputs:
+		return "costume"
 	return None
 
 def findfieldval(fields):
 
 	if 'KEY_OPTION' in fields:
-		return fields['KEY_OPTION'][0]
+		return fields['KEY_OPTION'][0] + " v"
 
 def create_script(directory, default_script, data, filename):
 
@@ -146,9 +154,8 @@ op_codes = co.clean_opcodes("opcodes.csv")
 script_directory = "scripts/"
 output_directory = "cleaned_json/"
 for filename in files:
-	if filename == "rm417703_q3_script0.json":
-		jsonfile = txtjson.txt_to_json(directory, output_directory, filename)
-		default_script = "script.js"
-		commands = parse_json(jsonfile)
-		scratchblocks_commands = parse_commands(commands)
-		create_script(script_directory, default_script, scratchblocks_commands, filename)
+	jsonfile = txtjson.txt_to_json(directory, output_directory, filename)
+	default_script = "script.js"
+	commands = parse_json(jsonfile)
+	scratchblocks_commands = parse_commands(commands)
+	create_script(script_directory, default_script, scratchblocks_commands, filename)
