@@ -11,7 +11,7 @@ const link = base + block_code;
   const PNG_SELECTOR = '#export-png';
   await page.goto(link);
   // Redirect Download
-  // await page._client.send('Page.setDownloadBehavior', { behavior: 'allow', downloadPath: './scratchblocks_png/' });
+  await page._client.send('Page.setDownloadBehavior', { behavior: 'allow', downloadPath: './img_files/' });
   await page.click(PNG_SELECTOR);
   setTimeout(() => { browser.close(); }, 300);
 })();

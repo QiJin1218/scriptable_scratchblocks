@@ -58,9 +58,13 @@ def parse_commands(commands):
 			result += partialresult
 		result += "%0A"
 
+	result = result.replace("(", "%5B")
+	result = result.replace(")", "%5D")
+	result = result.replace("For", " for")
+	result = result.replace("'m", " am")
+	result = result.replace("t's", "t is")
+	result = result.replace("'", "")
 	result = result.replace(" ", "%20")
-	result = result.replace("(", "[")
-	result = result.replace(")", "]")
 
 	# with open('scratch_code.txt', 'w') as f:
 	# 	f.write(result)
@@ -110,7 +114,10 @@ def findinputval(inputs, counter):
 
 	if 'MESSAGE' in inputs:
 		if counter == 0:
-			return inputs['MESSAGE'][1][1]
+			message = inputs['MESSAGE'][1][1]
+			if len(message) >= 25:
+				message = message[:22] + "..."
+			return message
 	if 'SECS' in inputs:
 		if counter == 1:
 			return inputs['SECS'][1][1]
@@ -159,3 +166,4 @@ for filename in files:
 	commands = parse_json(jsonfile)
 	scratchblocks_commands = parse_commands(commands)
 	create_script(script_directory, default_script, scratchblocks_commands, filename)
+	break
